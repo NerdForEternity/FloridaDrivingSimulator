@@ -150,6 +150,7 @@ public class CarController : MonoBehaviour
         {
             StartCoroutine(Spin360());
             AddStylePoints(10); // Gain style when spinning
+            ScoreManager.Instance.AddScore(100);
         }
     }
 
