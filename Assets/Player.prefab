@@ -1017,6 +1017,7 @@ WheelCollider:
     spring: 35000
     damper: 4500
     targetPosition: 0.5
+    targetPosition: 0.37
   m_SuspensionDistance: 162
   m_ForceAppPointDistance: 265
   m_Mass: 60
@@ -1197,6 +1198,7 @@ WheelCollider:
     spring: 35000
     damper: 4500
     targetPosition: 0.5
+    targetPosition: 0.37
   m_SuspensionDistance: 162
   m_ForceAppPointDistance: 265
   m_Mass: 60
@@ -1265,6 +1267,7 @@ Transform:
   - {fileID: 5522777256868449725}
   - {fileID: 1219755137770477212}
   - {fileID: 7220282924989511434}
+  - {fileID: 5522777256868449725}
   m_Father: {fileID: 7273931063924632411}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4685551685382687014
@@ -1329,6 +1332,7 @@ Rigidbody:
   m_GameObject: {fileID: 6075357617794992818}
   serializedVersion: 5
   m_Mass: 800
+  m_Mass: 2000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1472,6 +1476,7 @@ WheelCollider:
     spring: 35000
     damper: 4500
     targetPosition: 0.5
+    targetPosition: 0.37
   m_SuspensionDistance: 162
   m_ForceAppPointDistance: 265
   m_Mass: 60
@@ -1544,6 +1549,7 @@ WheelCollider:
     spring: 35000
     damper: 4500
     targetPosition: 0.5
+    targetPosition: 0.37
   m_SuspensionDistance: 162
   m_ForceAppPointDistance: 265
   m_Mass: 60
