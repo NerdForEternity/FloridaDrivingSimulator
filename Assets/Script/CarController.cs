@@ -101,7 +101,7 @@ public class CarController : MonoBehaviour
     {
         if (isDrifting && !wasDrifting)
         {
-            SetFriction(0.5f);
+            SetFriction(0.01f);
             wasDrifting = true;
         }
         else if (!isDrifting && wasDrifting)
