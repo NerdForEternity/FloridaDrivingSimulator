@@ -203,10 +203,10 @@ public class CarController : MonoBehaviour
 
     public string GetStyleRank()
     {
-        if (stylePoints >= 100) return "S";
-        if (stylePoints >= 75) return "A";
-        if (stylePoints >= 50) return "B";
-        if (stylePoints >= 25) return "C";
-        return "D";
+        if (stylePoints >= 100) return "A True Floridian";
+        if (stylePoints >= 75) return "Aw heck yea";
+        if (stylePoints >= 50) return "Getting the hang of it";
+        if (stylePoints >= 25) return "Not used to the humidity?";
+        return "Are you a tourist?";
     }
 }
