@@ -151,6 +151,7 @@ public class CarController : MonoBehaviour
             StartCoroutine(Spin360());
             AddStylePoints(10); // Gain style when spinning
             ScoreManager.Instance.AddScore(100);
+            ScoreManager.Instance.AddStyle(10);
         }
     }
 
@@ -190,16 +191,21 @@ public class CarController : MonoBehaviour
     void UpdateStyleDecay()
     {
         if (Time.time - lastHitTime > decayDelay && stylePoints > 0)
+        if (collision.gameObject.CompareTag("Hittable"))
         {
             stylePoints = Mathf.Max(0, stylePoints - 1); // Lose 1 per frame
             Debug.Log($"Style Decay: {stylePoints} ({GetStyleRank()})");
         }
     }
+            Debug.Log("Hit: " + collision.gameObject.name);
 
     public int GetCurrentStylePoints()
     {
         return stylePoints;
     }
+            // Add score and style
+            ScoreManager.Instance.AddScore(50);
+            ScoreManager.Instance.AddStyle(10);
 
     public string GetStyleRank()
     {
@@ -208,5 +214,9 @@ public class CarController : MonoBehaviour
         if (stylePoints >= 50) return "Getting the hang of it";
         if (stylePoints >= 25) return "Not used to the humidity?";
         return "Are you a tourist?";
+            
+        }
     }
+
+  
 }
