@@ -4,7 +4,6 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager Instance;
     public static ScoreManager Instance; // Singleton reference
 
     public int score = 0;
@@ -41,7 +40,6 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    void UpdateScoreUI()
     public void AddStyle(int amount)
     {
         style = Mathf.Clamp(style + amount, 0, maxStyle);
@@ -80,4 +78,3 @@ public class ScoreManager : MonoBehaviour
         return "Are you a tourist?";
     }
 }
-

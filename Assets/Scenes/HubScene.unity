@@ -302,7 +302,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45c357a41ac4894dbbdfed9ce24ee8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Level1
   sceneToLoad: Level1Scene
 --- !u!65 &319031165
 BoxCollider:
@@ -586,6 +585,8 @@ MonoBehaviour:
   frontRightTransform: {fileID: 1157751879}
   rearLeftTransform: {fileID: 1629412045}
   rearRightTransform: {fileID: 1651267768}
+  driveSound: {fileID: 8300000, guid: ffce6bc0c9a50744aa6782931381acc0, type: 3}
+  brakeSound: {fileID: 8300000, guid: b6be0357df8577143bf26ec105697b62, type: 3}
 --- !u!4 &343280034
 Transform:
   m_ObjectHideFlags: 0
