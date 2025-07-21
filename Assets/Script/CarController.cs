@@ -189,6 +189,7 @@ public class CarController : MonoBehaviour
 
     // Handle automatic decay after inactivity
     void UpdateStyleDecay()
+    private void OnCollisionEnter(Collision collision)
     {
         if (Time.time - lastHitTime > decayDelay && stylePoints > 0)
         if (collision.gameObject.CompareTag("Hittable"))
