@@ -12,19 +12,19 @@ public class CarHitbox : MonoBehaviour
             audioSource = gameObject.AddComponent<AudioSource>();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Hittable"))
+        Debug.Log("Hit: " + other.gameObject.name); // Log hit
+
+        if (other.CompareTag("Hittable"))
         {
             ScoreManager.Instance.AddScore(100);
             ScoreManager.Instance.AddStyle(10);
-
             // Play destroy sound
             if (destroySound != null)
                 audioSource.PlayOneShot(destroySound);
-
-            // Destroy the object after playing the sound
-            Destroy(collision.gameObject);
+            Destroy(other.gameObject);
+            Debug.Log("Destroyed: " + other.name);
         }
     }
 }
