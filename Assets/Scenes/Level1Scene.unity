@@ -26726,6 +26726,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: palmetto
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 138970f7ace7140449e3f03bab30f337, type: 3}
+      propertyPath: m_TagString
+      value: Hittable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -38002,6 +38006,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 395064874831768248, guid: 68a85486d6ff20d48acd326d4458f20d, type: 3}
   m_PrefabInstance: {fileID: 45782549}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2289689006389632575
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2862126264002406577, guid: 6ffc60fdaddc41c40aba5b339b222690, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 46.59022
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862126264002406577, guid: 6ffc60fdaddc41c40aba5b339b222690, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.26668617
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862126264002406577, guid: 6ffc60fdaddc41c40aba5b339b222690, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 44.023964
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862126264002406577, guid: 6ffc60fdaddc41c40aba5b339b222690, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862126264002406577, guid: 6ffc60fdaddc41c40aba5b339b222690, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862126264002406577, guid: 6ffc60fdaddc41c40aba5b339b222690, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862126264002406577, guid: 6ffc60fdaddc41c40aba5b339b222690, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862126264002406577, guid: 6ffc60fdaddc41c40aba5b339b222690, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862126264002406577, guid: 6ffc60fdaddc41c40aba5b339b222690, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862126264002406577, guid: 6ffc60fdaddc41c40aba5b339b222690, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3239073298232750603, guid: 6ffc60fdaddc41c40aba5b339b222690, type: 3}
+      propertyPath: m_Name
+      value: palmetto (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6ffc60fdaddc41c40aba5b339b222690, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -38039,3 +38100,4 @@ SceneRoots:
   - {fileID: 505590328}
   - {fileID: 1132860770}
   - {fileID: 1579404013}
+  - {fileID: 2289689006389632575}
