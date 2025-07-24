@@ -20,6 +20,7 @@ public class CarController : MonoBehaviour
     private bool isDrifting = false;
     private bool wasDrifting = false;
     private bool isSpinning = false;
+    private bool needsRespawn = false;
 
     // Audio clips and source for driving and braking sounds
     public AudioClip driveSound;
@@ -61,6 +62,7 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         ApplySteering();
         ApplyMotor();
         ApplyBrakes();

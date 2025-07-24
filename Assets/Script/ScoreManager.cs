@@ -8,7 +8,7 @@ public class ScoreManager : MonoBehaviour
 
     public int score = 0;
     public int style = 0;
-    public int scoreToWin = 1000;
+    public int scoreToWin = 5000;
     public int maxStyle = 100;
 
     public TextMeshProUGUI scoreText;

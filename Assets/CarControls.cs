@@ -135,6 +135,15 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetCar"",
+                    ""type"": ""Button"",
+                    ""id"": ""3c3f86f3-8ab6-4ff3-aebb-a2c80cf45f42"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -390,6 +399,28 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd9ec09a-85bd-458d-b391-40bd55f6cd68"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetCar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b710b28-3b5b-4f06-a233-1086fabc0fa9"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetCar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -403,6 +434,7 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
         m_Driving_Brake = m_Driving.FindAction("Brake", throwIfNotFound: true);
         m_Driving_Drift = m_Driving.FindAction("Drift", throwIfNotFound: true);
         m_Driving_Attack = m_Driving.FindAction("Attack", throwIfNotFound: true);
+        m_Driving_ResetCar = m_Driving.FindAction("ResetCar", throwIfNotFound: true);
     }
 
     ~@CarControls()
@@ -488,6 +520,7 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Driving_Brake;
     private readonly InputAction m_Driving_Drift;
     private readonly InputAction m_Driving_Attack;
+    private readonly InputAction m_Driving_ResetCar;
     /// <summary>
     /// Provides access to input actions defined in input action map "Driving".
     /// </summary>
@@ -519,6 +552,10 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Driving/Attack".
         /// </summary>
         public InputAction @Attack => m_Wrapper.m_Driving_Attack;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/ResetCar".
+        /// </summary>
+        public InputAction @ResetCar => m_Wrapper.m_Driving_ResetCar;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -560,6 +597,9 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @ResetCar.started += instance.OnResetCar;
+            @ResetCar.performed += instance.OnResetCar;
+            @ResetCar.canceled += instance.OnResetCar;
         }
 
         /// <summary>
@@ -586,6 +626,9 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @ResetCar.started -= instance.OnResetCar;
+            @ResetCar.performed -= instance.OnResetCar;
+            @ResetCar.canceled -= instance.OnResetCar;
         }
 
         /// <summary>
@@ -661,5 +704,12 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ResetCar" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnResetCar(InputAction.CallbackContext context);
     }
 }
