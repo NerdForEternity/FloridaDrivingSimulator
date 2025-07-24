@@ -3,7 +3,57 @@ guid: c50fe580c5566574fae18c3e29bd0189
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: banana_peel1
+    second: {fileID: 2100000, guid: 4e3e0c7b5bd71ca4a81c2bd48194df07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bottle_label1
+    second: {fileID: 2100000, guid: 4e3e0c7b5bd71ca4a81c2bd48194df07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bottle_neck1
+    second: {fileID: 2100000, guid: 4e3e0c7b5bd71ca4a81c2bd48194df07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: brown_bag1
+    second: {fileID: 2100000, guid: 4e3e0c7b5bd71ca4a81c2bd48194df07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: can_top1
+    second: {fileID: 2100000, guid: 4e3e0c7b5bd71ca4a81c2bd48194df07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: crushedcan_body1
+    second: {fileID: 2100000, guid: 4e3e0c7b5bd71ca4a81c2bd48194df07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dirt_pile1
+    second: {fileID: 2100000, guid: 4e3e0c7b5bd71ca4a81c2bd48194df07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert7
+    second: {fileID: 2100000, guid: 4e3e0c7b5bd71ca4a81c2bd48194df07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: straw1
+    second: {fileID: 2100000, guid: 4e3e0c7b5bd71ca4a81c2bd48194df07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: white_paper1
+    second: {fileID: 2100000, guid: 4e3e0c7b5bd71ca4a81c2bd48194df07, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
