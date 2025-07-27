@@ -6,9 +6,11 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance; // Singleton reference
 
+    public GameObject winScreen;
+
     public int score = 0;
     public int style = 0;
-    public int scoreToWin = 1000;
+    [SerializeField] private int scoreToWin = 5000;
     public int maxStyle = 100;
 
     public TextMeshProUGUI scoreText;
@@ -34,9 +36,10 @@ public class ScoreManager : MonoBehaviour
         score += amount;
         UpdateScoreUI();
 
-        if (score >= scoreToWin)
+        if (score >= scoreToWin && winScreen != null)
         {
-            SceneManager.LoadScene("HubScene");
+            winScreen.SetActive(true);
+            Time.timeScale = 0f; // Pause the game
         }
     }
 

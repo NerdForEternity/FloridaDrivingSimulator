@@ -13,7 +13,7 @@ public class Menus : MonoBehaviour
     [Header("Score & Timer")]
     public int playerScore = 0;
     public float winScore = 5000f;
-    public bool timerExpired = false; // You can set this from your timer script later
+    public bool timerExpired = false; 
 
     private bool gameEnded = false;
     public static bool GameIsPaused = false;
@@ -103,7 +103,7 @@ public class Menus : MonoBehaviour
     public void ReturnToHub()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("HubLevel"); // Replace with actual hub scene name
+        SceneManager.LoadScene("HubScene"); // Replace with actual hub scene name
     }
 
     public void QuitGame()
