@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7059999669116320506}
   - component: {fileID: 4588143868493042892}
   - component: {fileID: 2585873824217922150}
-  - component: {fileID: 4280709035241967098}
+  - component: {fileID: 8170890190903866869}
   m_Layer: 0
   m_Name: TestCrashCube
   m_TagString: Untagged
@@ -137,7 +137,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4280709035241967098
+--- !u!114 &8170890190903866869
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,5 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 516c168c92f45fd4eb72293d2776098a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionSprite: {fileID: 9102771936167739014, guid: 325750e86ac169642ae016e1d6472ee2, type: 3}
+  explosionList:
+  - {fileID: 9102771936167739014, guid: 325750e86ac169642ae016e1d6472ee2, type: 3}
+  - {fileID: 7747696009814824727, guid: 9dab02366b0e69f4fbc17f34cdc47c5b, type: 3}
+  - {fileID: 9102771936167739014, guid: 5c61822bd64870347a583365d91bbde3, type: 3}
   spriteLifetime: 3

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DestructibleObject : MonoBehaviour
 {
-    public GameObject explosionSprite;
+    public List<GameObject> explosionList;
     public float spriteLifetime = 3f;
-    //Transform objectTransform = GetComponent<Transform>().position;
+     
 
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,16 +23,21 @@ public class DestructibleObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-             
-        SpawnAndDestroyExplosion();
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Detected Player");
+            SpawnAndDestroyExplosion();
+        }   
+        
     }
-
+   
     //Method to spawn and destroy the explosion after destroying the cube
     void SpawnAndDestroyExplosion()
     {
         Vector3 cubePosition = transform.position; // Get the position of the gameobject this script is attached to
+        int listMax = explosionList.Count; //Get the maximum length of the explosionList
         Destroy(gameObject); // Destroy the GameObject this script is attached to
-        GameObject explosionClone = Instantiate(explosionSprite, cubePosition, Quaternion.identity);
+        GameObject explosionClone = Instantiate(explosionList[Random.Range(0, listMax)], cubePosition, Quaternion.identity);
         Destroy(explosionClone, spriteLifetime);
         Debug.Log("Destroyed Sprite");
     }
