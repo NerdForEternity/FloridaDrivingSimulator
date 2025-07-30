@@ -2309,7 +2309,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: ffce6bc0c9a50744aa6782931381acc0, type: 3}
     - target: {fileID: 1711289961138442321, guid: 9f13970da7af4bf439a8697991937220, type: 3}
       propertyPath: maxMotorTorque
-      value: 5000
+      value: 3500
       objectReference: {fileID: 0}
     - target: {fileID: 1711289961138442321, guid: 9f13970da7af4bf439a8697991937220, type: 3}
       propertyPath: maxSteeringAngle
@@ -2326,6 +2326,10 @@ PrefabInstance:
     - target: {fileID: 6654441193974131642, guid: 9f13970da7af4bf439a8697991937220, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6834522525387343362, guid: 9f13970da7af4bf439a8697991937220, type: 3}
+      propertyPath: m_Mass
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 6834522525387343362, guid: 9f13970da7af4bf439a8697991937220, type: 3}
       propertyPath: m_Interpolate
@@ -5520,6 +5524,7 @@ GameObject:
   - component: {fileID: 253666024}
   - component: {fileID: 253666023}
   - component: {fileID: 253666022}
+  - component: {fileID: 253666025}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5558,6 +5563,7 @@ MonoBehaviour:
   playerScore: 0
   winScore: 5000
   timerExpired: 0
+  firstSelectedButton: {fileID: 263871004}
 --- !u!4 &253666024
 Transform:
   m_ObjectHideFlags: 0
@@ -5573,6 +5579,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &253666025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253666021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18875cb7a98483344a0ba77527e51471, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 1425814388}
+  testButton: {fileID: 0}
 --- !u!1001 &254858470
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39373,7 +39393,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'How to '
+  m_text: How to play
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -40808,7 +40828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1425814385}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1895124469
@@ -46739,10 +46759,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c739f155da8fdeb44ad449d3faa805d6, type: 3}
-  m_Resource: {fileID: 8300000, guid: c739f155da8fdeb44ad449d3faa805d6, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 116e7c599b825764c9d812c0183e563b, type: 3}
+  m_Resource: {fileID: 8300000, guid: 116e7c599b825764c9d812c0183e563b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0

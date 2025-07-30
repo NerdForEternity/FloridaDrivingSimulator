@@ -101,14 +101,20 @@ public class CarController : MonoBehaviour
     {
         if (isDrifting && !wasDrifting)
         {
-            SetFriction(0.01f); // Low friction for drifting
+            SetRearFriction(0.4f); // Let rear wheels slide more
             wasDrifting = true;
         }
         else if (!isDrifting && wasDrifting)
         {
-            SetFriction(1.0f); // Reset friction
+            SetRearFriction(1.0f); // Reset rear grip
             wasDrifting = false;
         }
+    }
+
+    void SetRearFriction(float stiffness)
+    {
+        SetWheelFriction(rearLeftWheel, stiffness);
+        SetWheelFriction(rearRightWheel, stiffness);
     }
 
     // Sets sideways friction stiffness for all wheels

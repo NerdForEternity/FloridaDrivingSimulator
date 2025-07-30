@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Menus : MonoBehaviour
 {
@@ -13,17 +16,44 @@ public class Menus : MonoBehaviour
     [Header("Score & Timer")]
     public int playerScore = 0;
     public float winScore = 5000f;
-    public bool timerExpired = false; 
+    public bool timerExpired = false;
+    public Button firstSelectedButton;
 
     private bool gameEnded = false;
     public static bool GameIsPaused = false;
+    private CarControls controls;
+
+    private void OnEnable()
+    {
+        if (controls == null)
+        {
+            controls = new CarControls();
+            controls.Driving.Start.performed += ctx => OnStartPressed();
+        }
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
+    }
+
+    void OnStartPressed()
+    {
+        if (gameEnded) return;
+
+        if (!GameIsPaused)
+            Pause();
+        else
+            Resume();
+    }
 
     void Update()
     {
         if (gameEnded) return;
 
-        // Open or close pause menu with Escape
-        if (Input.GetKeyDown(KeyCode.Escape))
+        // Open or close pause menu with Escape key (keyboard)
+        if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             if (!GameIsPaused)
                 Pause();
@@ -72,6 +102,9 @@ public class Menus : MonoBehaviour
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(firstSelectedButton.gameObject);
     }
 
     public void Resume()

@@ -3,6 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class GameSceneManager : MonoBehaviour
 {
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Triggered with: " + other.name);
+        // then the same if checks
+    }
     public void LoadLevel1()
     {
         
