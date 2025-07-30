@@ -27,6 +27,7 @@ public class CarController : MonoBehaviour
     private AudioSource audioSource;
     private bool isDrivingSoundPlaying = false;
     private bool isBrakingSoundPlaying = false;
+    public Rigidbody carBody;
 
     // Reference to new Input System action map
     private CarControls controls;
@@ -40,7 +41,12 @@ public class CarController : MonoBehaviour
         if (audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
 
-        // Setup input callbacks for steering, throttle, brake, drift, and attack
+        
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
         controls.Driving.Steer.performed += ctx => steerInput = ctx.ReadValue<float>();
         controls.Driving.Steer.canceled += _ => steerInput = 0f;
 
@@ -54,6 +60,7 @@ public class CarController : MonoBehaviour
         controls.Driving.Drift.canceled += _ => isDrifting = false;
 
         controls.Driving.Attack.performed += _ => SpinAttack();
+
     }
 
     private void OnEnable() => controls.Enable();
@@ -69,6 +76,18 @@ public class CarController : MonoBehaviour
 
         HandleDriveSound();
         HandleBrakeSound();
+
+        ApplyAntiFlipForces();
+    }
+
+    void ApplyAntiFlipForces()
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+
+        Vector3 localAngularVelocity = transform.InverseTransformDirection(carBody.angularVelocity);
+        localAngularVelocity.x *= 0.5f;
+        localAngularVelocity.z *= 0.5f;
+        carBody.angularVelocity = transform.TransformDirection(localAngularVelocity);
     }
 
     // Applies torque to rear wheels based on throttle input

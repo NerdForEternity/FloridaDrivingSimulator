@@ -119,6 +119,55 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &14407048
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 14407050}
+  - component: {fileID: 14407049}
+  m_Layer: 0
+  m_Name: CutsceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &14407049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14407048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ba8202f9bc337c4baff8add2040fc84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cutsceneImage: {fileID: 0}
+  voiceoverAudio: {fileID: 0}
+  cutsceneDuration: 5
+  isOpeningCutscene: 1
+  nextSceneName: HubScene
+--- !u!4 &14407050
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14407048}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 24.89287, y: 9.19269, z: -22.14995}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &16158487
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,6 +460,10 @@ PrefabInstance:
       value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 1711289961138442321, guid: 9f13970da7af4bf439a8697991937220, type: 3}
+      propertyPath: carBody
+      value: 
+      objectReference: {fileID: 79406380}
+    - target: {fileID: 1711289961138442321, guid: 9f13970da7af4bf439a8697991937220, type: 3}
       propertyPath: brakeSound
       value: 
       objectReference: {fileID: 8300000, guid: b6be0357df8577143bf26ec105697b62, type: 3}
@@ -544,6 +597,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroySound: {fileID: 8300000, guid: 81350959011b69a42b5fba18f10c9b18, type: 3}
+--- !u!54 &79406380 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 6834522525387343362, guid: 9f13970da7af4bf439a8697991937220, type: 3}
+  m_PrefabInstance: {fileID: 79406376}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &95973158
 GameObject:
   m_ObjectHideFlags: 0
@@ -2274,6 +2332,7 @@ MonoBehaviour:
   rearRightTransform: {fileID: 1651267768}
   driveSound: {fileID: 8300000, guid: ffce6bc0c9a50744aa6782931381acc0, type: 3}
   brakeSound: {fileID: 8300000, guid: b6be0357df8577143bf26ec105697b62, type: 3}
+  carBody: {fileID: 0}
 --- !u!4 &343280034
 Transform:
   m_ObjectHideFlags: 0
@@ -5091,6 +5150,7 @@ MonoBehaviour:
   playerScore: 0
   winScore: 5000
   timerExpired: 0
+  firstSelectedButton: {fileID: 0}
 --- !u!114 &1088152704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8222,3 +8282,4 @@ SceneRoots:
   - {fileID: 1057607066}
   - {fileID: 205681205}
   - {fileID: 79406376}
+  - {fileID: 14407050}
