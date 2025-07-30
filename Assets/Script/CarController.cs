@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
-// Controls a car using Unity's WheelCollider physics and the new Input System
 public class CarController : MonoBehaviour
 {
     // Tuning values for power, steering, and braking
@@ -10,13 +9,11 @@ public class CarController : MonoBehaviour
     public float maxSteeringAngle = 30f;
     public float brakeForce = 3000f;
 
-    // References to the WheelColliders used for physics simulation
+    // Wheel colliders for physics and visual wheel transforms
     public WheelCollider frontLeftWheel, frontRightWheel, rearLeftWheel, rearRightWheel;
-
-    // References to the visible wheel meshes for visual rotation
     public Transform frontLeftTransform, frontRightTransform, rearLeftTransform, rearRightTransform;
 
-    // Input values received from the player
+    // Input values to track player commands
     private float steerInput = 0f;
     private float throttleInput = 0f;
     private bool isBraking = false;
@@ -24,37 +21,38 @@ public class CarController : MonoBehaviour
     private bool wasDrifting = false;
     private bool isSpinning = false;
 
-    // Style meter variables
-    private int stylePoints = 0;         // Current style points
-    private float lastHitTime = 0f;      // Time since last style gain
-    private const float decayDelay = 3f; // Time in seconds before style decays
-    private const int maxStyle = 100;    // Maximum style value
+    // Audio clips and source for driving and braking sounds
+    public AudioClip driveSound;
+    public AudioClip brakeSound;
+    private AudioSource audioSource;
+    private bool isDrivingSoundPlaying = false;
+    private bool isBrakingSoundPlaying = false;
 
-    // Reference to the input action map (auto-generated from Input Actions asset)
+    // Reference to new Input System action map
     private CarControls controls;
 
-    // Setup input bindings
     private void Awake()
     {
         controls = new CarControls();
 
-        // Steering input (A/D or Left/Right keys)
+        // Get or add AudioSource component for playing sounds
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        // Setup input callbacks for steering, throttle, brake, drift, and attack
         controls.Driving.Steer.performed += ctx => steerInput = ctx.ReadValue<float>();
         controls.Driving.Steer.canceled += _ => steerInput = 0f;
 
-        // Throttle input (W/S or Up/Down keys)
         controls.Driving.Throttle.performed += ctx => throttleInput = ctx.ReadValue<float>();
         controls.Driving.Throttle.canceled += _ => throttleInput = 0f;
 
-        // Brake input (Spacebar)
         controls.Driving.Brake.performed += _ => isBraking = true;
         controls.Driving.Brake.canceled += _ => isBraking = false;
 
-        // Drift input (Left Shift)
         controls.Driving.Drift.performed += _ => isDrifting = true;
         controls.Driving.Drift.canceled += _ => isDrifting = false;
 
-        // Attack input (E key)
         controls.Driving.Attack.performed += _ => SpinAttack();
     }
 
@@ -68,17 +66,19 @@ public class CarController : MonoBehaviour
         ApplyBrakes();
         ApplyDrift();
         UpdateWheelTransforms();
-        UpdateStyleDecay();
+
+        HandleDriveSound();
+        HandleBrakeSound();
     }
 
-    // Apply throttle input to the rear wheels
+    // Applies torque to rear wheels based on throttle input
     void ApplyMotor()
     {
         rearLeftWheel.motorTorque = throttleInput * maxMotorTorque;
         rearRightWheel.motorTorque = throttleInput * maxMotorTorque;
     }
 
-    // Apply steering input to the front wheels
+    // Applies steering angle to front wheels based on steering input
     void ApplySteering()
     {
         float steer = steerInput * maxSteeringAngle;
@@ -86,7 +86,7 @@ public class CarController : MonoBehaviour
         frontRightWheel.steerAngle = steer;
     }
 
-    // Apply brake force to all four wheels if braking
+    // Applies braking torque to all wheels if braking
     void ApplyBrakes()
     {
         float brake = isBraking ? brakeForce : 0f;
@@ -96,22 +96,22 @@ public class CarController : MonoBehaviour
         rearRightWheel.brakeTorque = brake;
     }
 
-    // Adjust wheel friction to simulate drifting
+    // Adjusts wheel friction to simulate drifting effect
     void ApplyDrift()
     {
         if (isDrifting && !wasDrifting)
         {
-            SetFriction(0.5f);
+            SetFriction(0.01f); // Low friction for drifting
             wasDrifting = true;
         }
         else if (!isDrifting && wasDrifting)
         {
-            SetFriction(1.0f);
+            SetFriction(1.0f); // Reset friction
             wasDrifting = false;
         }
     }
 
-    // Adjust friction on all wheels
+    // Sets sideways friction stiffness for all wheels
     void SetFriction(float stiffness)
     {
         SetWheelFriction(frontLeftWheel, stiffness);
@@ -120,6 +120,7 @@ public class CarController : MonoBehaviour
         SetWheelFriction(rearRightWheel, stiffness);
     }
 
+    // Helper to set friction on a single wheel
     void SetWheelFriction(WheelCollider wheel, float stiffness)
     {
         WheelFrictionCurve friction = wheel.sidewaysFriction;
@@ -127,7 +128,7 @@ public class CarController : MonoBehaviour
         wheel.sidewaysFriction = friction;
     }
 
-    // Update wheel mesh transforms
+    // Updates the visual position and rotation of the wheel meshes
     void UpdateWheelTransforms()
     {
         UpdateWheel(frontLeftWheel, frontLeftTransform);
@@ -136,6 +137,7 @@ public class CarController : MonoBehaviour
         UpdateWheel(rearRightWheel, rearRightTransform);
     }
 
+    // Gets current world position and rotation from wheel collider and applies it to the mesh
     void UpdateWheel(WheelCollider col, Transform trans)
     {
         col.GetWorldPose(out Vector3 pos, out Quaternion rot);
@@ -143,17 +145,16 @@ public class CarController : MonoBehaviour
         trans.rotation = rot;
     }
 
-    // Trigger spin attack
+    // Starts the spin attack animation coroutine if not already spinning
     void SpinAttack()
     {
         if (!isSpinning)
         {
             StartCoroutine(Spin360());
-            AddStylePoints(10); // Gain style when spinning
         }
     }
 
-    // Coroutine to rotate the car 360 degrees
+    // Coroutine to smoothly spin the car 360 degrees over 0.5 seconds
     IEnumerator Spin360()
     {
         isSpinning = true;
@@ -177,35 +178,40 @@ public class CarController : MonoBehaviour
         isSpinning = false;
     }
 
-    // Add style points (clamped)
-    void AddStylePoints(int amount)
+    // Handles playing or stopping the driving sound based on throttle input
+    private void HandleDriveSound()
     {
-        stylePoints = Mathf.Clamp(stylePoints + amount, 0, maxStyle);
-        lastHitTime = Time.time;
-        Debug.Log($"Style: {stylePoints} ({GetStyleRank()})");
-    }
-
-    // Handle automatic decay after inactivity
-    void UpdateStyleDecay()
-    {
-        if (Time.time - lastHitTime > decayDelay && stylePoints > 0)
+        if (Mathf.Abs(throttleInput) > 0.01f)
         {
-            stylePoints = Mathf.Max(0, stylePoints - 1); // Lose 1 per frame
-            Debug.Log($"Style Decay: {stylePoints} ({GetStyleRank()})");
+            if (!isDrivingSoundPlaying)
+            {
+                audioSource.clip = driveSound;
+                audioSource.loop = true;
+                audioSource.Play();
+                isDrivingSoundPlaying = true;
+            }
+        }
+        else
+        {
+            if (isDrivingSoundPlaying)
+            {
+                audioSource.Stop();
+                isDrivingSoundPlaying = false;
+            }
         }
     }
 
-    public int GetCurrentStylePoints()
+    // Plays brake sound when braking starts
+    private void HandleBrakeSound()
     {
-        return stylePoints;
-    }
-
-    public string GetStyleRank()
-    {
-        if (stylePoints >= 100) return "S";
-        if (stylePoints >= 75) return "A";
-        if (stylePoints >= 50) return "B";
-        if (stylePoints >= 25) return "C";
-        return "D";
+        if (isBraking && !isBrakingSoundPlaying)
+        {
+            audioSource.PlayOneShot(brakeSound);
+            isBrakingSoundPlaying = true;
+        }
+        else if (!isBraking)
+        {
+            isBrakingSoundPlaying = false;
+        }
     }
 }

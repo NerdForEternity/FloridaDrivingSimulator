@@ -1,71 +1,114 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Menus : MonoBehaviour
 {
-    //Creates a game object reference variable for the pause menu
+    [Header("UI Panels")]
     public GameObject pauseMenu;
+    public GameObject winScreen;
+    public GameObject loseScreen;
+    public GameObject howToPlayScreen;
 
-    //When the Play Button is pressed, loads the first scene for the game
-    public void PlayGame()
+    [Header("Score & Timer")]
+    public int playerScore = 0;
+    public float winScore = 5000f;
+    public bool timerExpired = false; 
+
+    private bool gameEnded = false;
+    public static bool GameIsPaused = false;
+
+    void Update()
     {
-        SceneManager.LoadScene("Level1");
+        if (gameEnded) return;
+
+        // Open or close pause menu with Escape
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!GameIsPaused)
+                Pause();
+            else
+                Resume();
+        }
+
+        // Win check
+        if (playerScore >= winScore)
+        {
+            ShowWinScreen();
+        }
+
+        // Lose check
+        if (timerExpired)
+        {
+            ShowLoseScreen();
+        }
     }
 
-    //Closes the game
+    public void AddScore(int amount)
+    {
+        playerScore += amount;
+    }
+
+    void ShowWinScreen()
+    {
+        if (gameEnded) return;
+
+        gameEnded = true;
+        winScreen.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    void ShowLoseScreen()
+    {
+        if (gameEnded) return;
+
+        gameEnded = true;
+        loseScreen.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void Pause()
+    {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+    }
+
+    public void Resume()
+    {
+        pauseMenu.SetActive(false);
+        howToPlayScreen.SetActive(false);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+    }
+
+    public void ShowHowToPlay()
+    {
+        howToPlayScreen.SetActive(true);
+        pauseMenu.SetActive(false);
+    }
+
+    public void BackToPauseMenu()
+    {
+        howToPlayScreen.SetActive(false);
+        pauseMenu.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void ReturnToHub()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("HubScene"); // Replace with actual hub scene name
+    }
+
     public void QuitGame()
     {
         Application.Quit();
         Debug.Log("Quitting Game");
     }
-
-    //Resumes the game when paused
-    public void ResumeGame()
-    {
-        Resume();
-    }
-
-    //Restarts the game/level (SUBJECT TO CHANGE) for now just reloads the "Level1" scene
-    public void RestartGame()
-    {
-        SceneManager.LoadScene("Level1");
-    }
-
-
-    //Creates a boolean for to determine if the game is paused or not
-    public static bool GameIsPaused = false;
-
-    void Update()
-    {
-        //If the 'Esc' button is pressed, pauses the game
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (GameIsPaused == false)
-            {
-                Pause();
-            }
-        }
-    }
-
-    //Method to resume the game when paused
-    void Resume()
-    {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
-        GameIsPaused = false;
-        Debug.Log("Resuming Game");
-    }
-
-    //Method to pause the game
-    void Pause()
-    {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
-        Debug.Log("Pausing Game");
-    }
-
 }
