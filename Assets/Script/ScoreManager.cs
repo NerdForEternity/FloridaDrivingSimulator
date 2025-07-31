@@ -40,6 +40,7 @@ public class ScoreManager : MonoBehaviour
         {
             winScreen.SetActive(true);
             Time.timeScale = 0f; // Pause the game
+            GameProgressManager.Instance?.CompleteLevel(SceneManager.GetActiveScene().name);
         }
     }
 
