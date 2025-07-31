@@ -42,18 +42,27 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack",
+                    "name": "Start",
                     "type": "Button",
-                    "id": "511b7d02-7123-429a-9bf0-ccdf2d8a4cbe",
+                    "id": "7b5e3867-4326-4cbc-b02e-1912782113a9",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Start",
+                    "name": "Attack",
                     "type": "Button",
-                    "id": "7b5e3867-4326-4cbc-b02e-1912782113a9",
+                    "id": "45fe37cf-6f86-4977-ab9b-c81515b547a1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reset",
+                    "type": "Button",
+                    "id": "82ca31cb-d1dc-47b7-b61e-5bbc62d86ca7",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -294,34 +303,34 @@
                 },
                 {
                     "name": "",
-                    "id": "11030a4b-c82d-4060-a000-b5d56d6acbcc",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9e8f45d3-9467-4643-9630-1cf1b2602b31",
-                    "path": "<XInputController>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "822f98a6-82e2-4bf3-a9b3-561c01d80cf6",
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b5858246-c11f-49bf-a1b5-45912bec3192",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1599879d-b1c7-4128-8084-777f5b360a25",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reset",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
