@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Damage : MonoBehaviour
 {
-    public int damage = 2;
+    public int damage = -1;
     private PlayerControllerHB playerControllerHB;
 
     private void OnCollisionEnter(Collision collision)
