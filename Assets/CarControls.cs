@@ -128,18 +128,27 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Attack"",
+                    ""name"": ""Start"",
                     ""type"": ""Button"",
-                    ""id"": ""511b7d02-7123-429a-9bf0-ccdf2d8a4cbe"",
+                    ""id"": ""7b5e3867-4326-4cbc-b02e-1912782113a9"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Start"",
+                    ""name"": ""Attack"",
                     ""type"": ""Button"",
-                    ""id"": ""7b5e3867-4326-4cbc-b02e-1912782113a9"",
+                    ""id"": ""45fe37cf-6f86-4977-ab9b-c81515b547a1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reset"",
+                    ""type"": ""Button"",
+                    ""id"": ""82ca31cb-d1dc-47b7-b61e-5bbc62d86ca7"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -380,34 +389,34 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""11030a4b-c82d-4060-a000-b5d56d6acbcc"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9e8f45d3-9467-4643-9630-1cf1b2602b31"",
-                    ""path"": ""<XInputController>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""822f98a6-82e2-4bf3-a9b3-561c01d80cf6"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b5858246-c11f-49bf-a1b5-45912bec3192"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1599879d-b1c7-4128-8084-777f5b360a25"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -422,8 +431,9 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
         m_Driving_Throttle = m_Driving.FindAction("Throttle", throwIfNotFound: true);
         m_Driving_Brake = m_Driving.FindAction("Brake", throwIfNotFound: true);
         m_Driving_Drift = m_Driving.FindAction("Drift", throwIfNotFound: true);
-        m_Driving_Attack = m_Driving.FindAction("Attack", throwIfNotFound: true);
         m_Driving_Start = m_Driving.FindAction("Start", throwIfNotFound: true);
+        m_Driving_Attack = m_Driving.FindAction("Attack", throwIfNotFound: true);
+        m_Driving_Reset = m_Driving.FindAction("Reset", throwIfNotFound: true);
     }
 
     ~@CarControls()
@@ -508,8 +518,9 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Driving_Throttle;
     private readonly InputAction m_Driving_Brake;
     private readonly InputAction m_Driving_Drift;
-    private readonly InputAction m_Driving_Attack;
     private readonly InputAction m_Driving_Start;
+    private readonly InputAction m_Driving_Attack;
+    private readonly InputAction m_Driving_Reset;
     /// <summary>
     /// Provides access to input actions defined in input action map "Driving".
     /// </summary>
@@ -538,13 +549,17 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Drift => m_Wrapper.m_Driving_Drift;
         /// <summary>
+        /// Provides access to the underlying input action "Driving/Start".
+        /// </summary>
+        public InputAction @Start => m_Wrapper.m_Driving_Start;
+        /// <summary>
         /// Provides access to the underlying input action "Driving/Attack".
         /// </summary>
         public InputAction @Attack => m_Wrapper.m_Driving_Attack;
         /// <summary>
-        /// Provides access to the underlying input action "Driving/Start".
+        /// Provides access to the underlying input action "Driving/Reset".
         /// </summary>
-        public InputAction @Start => m_Wrapper.m_Driving_Start;
+        public InputAction @Reset => m_Wrapper.m_Driving_Reset;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -583,12 +598,15 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
             @Drift.started += instance.OnDrift;
             @Drift.performed += instance.OnDrift;
             @Drift.canceled += instance.OnDrift;
-            @Attack.started += instance.OnAttack;
-            @Attack.performed += instance.OnAttack;
-            @Attack.canceled += instance.OnAttack;
             @Start.started += instance.OnStart;
             @Start.performed += instance.OnStart;
             @Start.canceled += instance.OnStart;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
+            @Reset.started += instance.OnReset;
+            @Reset.performed += instance.OnReset;
+            @Reset.canceled += instance.OnReset;
         }
 
         /// <summary>
@@ -612,12 +630,15 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
             @Drift.started -= instance.OnDrift;
             @Drift.performed -= instance.OnDrift;
             @Drift.canceled -= instance.OnDrift;
-            @Attack.started -= instance.OnAttack;
-            @Attack.performed -= instance.OnAttack;
-            @Attack.canceled -= instance.OnAttack;
             @Start.started -= instance.OnStart;
             @Start.performed -= instance.OnStart;
             @Start.canceled -= instance.OnStart;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
+            @Reset.started -= instance.OnReset;
+            @Reset.performed -= instance.OnReset;
+            @Reset.canceled -= instance.OnReset;
         }
 
         /// <summary>
@@ -687,6 +708,13 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDrift(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "Start" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnStart(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "Attack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -694,11 +722,11 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAttack(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Start" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Reset" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnStart(InputAction.CallbackContext context);
+        void OnReset(InputAction.CallbackContext context);
     }
 }
