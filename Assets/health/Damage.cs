@@ -5,21 +5,19 @@ using UnityEngine.UI;
 
 public class Damage : MonoBehaviour
 {
-    // public int damageDealt = 1;
-    public PlayerControllerHB playerControllerHB;
+    public int damage = 2;
+    private PlayerControllerHB playerControllerHB;
 
     private void OnCollisionEnter(Collision collision)
     {
-      CarController carController = GetComponent<CarController>();
-        if (carController == null )
+        if(collision.gameObject.tag == "Player")
         {
-            playerControllerHB.TakeDamage(-1);
+            if (playerControllerHB == null)
+            {
+                playerControllerHB = collision.gameObject.GetComponent<PlayerControllerHB>();
+            }
+            playerControllerHB.TakeDamage(damage);
         }
-        
-        //  if (collision.gameObject.tag == "Player")
-           // {
-           // playerControllerHB.TakeDamage(damageDealt);
-           // }
     }
 
 }

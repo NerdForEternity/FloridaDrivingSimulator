@@ -34,8 +34,8 @@ public class PlayerControllerHB : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        currentHealthNum = amount;
-        if (currentHealthNum <= 0)
+        currentHealthNum -= amount;
+        if (currentHealthNum >= 0)
         {
             Destroy(gameObject);
         }
