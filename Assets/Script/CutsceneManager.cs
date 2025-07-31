@@ -1,44 +1,29 @@
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class CutsceneManager : MonoBehaviour
 {
-    [Header("Cutscene Elements")]
-    public Image cutsceneImage;
-    public AudioSource voiceoverAudio;
-    public float cutsceneDuration = 5f; // Default duration (can change per scene)
+    public VideoPlayer videoPlayer;
+    public GameObject cutsceneCanvas; // optional: hide overlay/UI
 
-    [Header("Scene Settings")]
-    public bool isOpeningCutscene = false;
-    public string nextSceneName; // Set this for opening cutscene to load the hub or level 1
-
-    void Start()
+    private void Start()
     {
-        if (isOpeningCutscene)
-            PlayCutscene();
+        if (videoPlayer != null)
+        {
+            videoPlayer.loopPointReached += EndCutscene;
+            videoPlayer.Play();
+        }
     }
 
-    public void PlayCutscene()
+    private void EndCutscene(VideoPlayer vp)
     {
-        cutsceneImage.gameObject.SetActive(true);
-        if (voiceoverAudio != null)
-            voiceoverAudio.Play();
+        vp.Stop();
+        if (cutsceneCanvas != null)
+            cutsceneCanvas.SetActive(false);
 
-        Invoke(nameof(EndCutscene), cutsceneDuration);
-    }
+        // Load the HubScene after the cutscene finishes
+        UnityEngine.SceneManagement.SceneManager.LoadScene("HubScene");
 
-    public void EndCutscene()
-    {
-        cutsceneImage.gameObject.SetActive(false);
-        if (isOpeningCutscene)
-        {
-            SceneManager.LoadScene(nextSceneName);
-        }
-        else
-        {
-            // End cutscene for victory—return to menu or hub
-            SceneManager.LoadScene("HubLevel"); // Change this as needed
-        }
+        this.enabled = false;
     }
 }

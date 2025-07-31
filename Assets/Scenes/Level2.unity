@@ -22138,7 +22138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f81c58ce51ace4490da2c1660a516b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winScreen: {fileID: 0}
+  winScreen: {fileID: 898882929}
   score: 0
   style: 0
   scoreToWin: 5000
