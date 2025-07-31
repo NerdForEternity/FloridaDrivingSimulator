@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerControllerHB : MonoBehaviour
 {
+    public Damage damage;
     [SerializeField] private Image healthBar;
 
     private float maxHealth = 250f;
