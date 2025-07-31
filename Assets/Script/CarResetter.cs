@@ -4,23 +4,17 @@ using System.Collections;
 
 public class CarResetter : MonoBehaviour
 {
+
     [SerializeField] private Transform resetPoint;
     private Rigidbody rb;
-    private CarControls controls;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        controls = new CarControls();
-        controls.Driving.Reset.performed += _ => ResetCar();
     }
-
-    private void OnEnable() => controls.Enable();
-    private void OnDisable() => controls.Disable();
 
     private void Update()
     {
-        // Still support keyboard R
         if (Keyboard.current.rKey.wasPressedThisFrame)
         {
             ResetCar();
@@ -29,18 +23,24 @@ public class CarResetter : MonoBehaviour
 
     private void ResetCar()
     {
+        // Stop all motion
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
+        // Temporarily disable physics
         rb.isKinematic = true;
+
+        // Move and rotate to reset point
         transform.position = resetPoint.position;
         transform.rotation = resetPoint.rotation;
+
+        // Reactivate physics on next frame
         StartCoroutine(ReenablePhysics());
     }
 
     private IEnumerator ReenablePhysics()
     {
-        yield return null;
+        yield return null; // wait 1 frame
         rb.isKinematic = false;
     }
 }

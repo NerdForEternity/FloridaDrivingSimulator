@@ -18,7 +18,7 @@ public class CarHitbox : MonoBehaviour
 
         if (other.CompareTag("Hittable"))
         {
-            ScoreManager.Instance.AddScore(50);
+            ScoreManager.Instance.AddScore(100);
             ScoreManager.Instance.AddStyle(10);
             // Play destroy sound
             if (destroySound != null)
