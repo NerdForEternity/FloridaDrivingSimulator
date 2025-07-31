@@ -9,6 +9,8 @@ public class PlayerControllerHB : MonoBehaviour
 
     private float maxHealth = 250f;
     private float currentHealth;
+    public int healthNumMax = 8;
+    public int currentHealthNum;
 
     void Start()
     {
@@ -21,8 +23,19 @@ public class PlayerControllerHB : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            currentHealthNum -= 1;
+
             currentHealth -= 31.25f;
             UpdateHealthBar();
+        }
+    }
+
+    public void TakeDamage(int amount)
+    {
+        currentHealthNum -= amount;
+        if (currentHealthNum <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 
