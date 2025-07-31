@@ -15,6 +15,7 @@ public class PlayerControllerHB : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        currentHealthNum = healthNumMax;
         UpdateHealthBar();
     }
 
