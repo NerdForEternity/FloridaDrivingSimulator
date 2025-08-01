@@ -1633,6 +1633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 935729354}
+  loseScreen: {fileID: 841148338}
   healthNumMax: 8
   currentHealthNum: 0
 --- !u!114 &46188705
@@ -30867,6 +30868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 935729354}
+  loseScreen: {fileID: 0}
   healthNumMax: 8
   currentHealthNum: 0
 --- !u!1001 &706403162

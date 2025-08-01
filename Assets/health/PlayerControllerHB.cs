@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class PlayerControllerHB : MonoBehaviour
 {
     [SerializeField] private Image healthBar;
+    [SerializeField] private GameObject loseScreen; // ? Drag your LoseScreen UI here
 
     private float maxHealth = 250f;
     private float currentHealth;
@@ -15,11 +16,14 @@ public class PlayerControllerHB : MonoBehaviour
         currentHealth = maxHealth;
         currentHealthNum = healthNumMax;
         UpdateHealthBar();
+
+        if (loseScreen != null)
+            loseScreen.SetActive(false); // Make sure it's hidden at start
     }
 
     void Update()
     {
-       
+        
     }
 
     public void TakeDamage(int amount)
@@ -31,7 +35,10 @@ public class PlayerControllerHB : MonoBehaviour
 
         if (currentHealthNum <= 0)
         {
-            Destroy(gameObject);
+            if (loseScreen != null)
+                loseScreen.SetActive(true); // Show lose screen
+            // Optionally disable car movement here
+            // Destroy(gameObject); ? don't use this now
         }
     }
 
