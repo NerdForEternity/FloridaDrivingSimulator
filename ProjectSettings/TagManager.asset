@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Hittable
   - damage
+  - Damage
   layers:
   - Default
   - TransparentFX

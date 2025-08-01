@@ -5,18 +5,20 @@ using UnityEngine.UI;
 
 public class Damage : MonoBehaviour
 {
-    public int damage = -1;
     private PlayerControllerHB playerControllerHB;
+
+    public int damageAmount = 1; 
+
+    private void Start()
+    {
+        playerControllerHB = GetComponent<PlayerControllerHB>();
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Damage"))
         {
-            if (playerControllerHB == null)
-            {
-                playerControllerHB = collision.gameObject.GetComponent<PlayerControllerHB>();
-            }
-            playerControllerHB.TakeDamage(damage);
+            playerControllerHB.TakeDamage(damageAmount);
         }
     }
 
